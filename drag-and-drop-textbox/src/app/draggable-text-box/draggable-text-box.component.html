@@ -1,0 +1,43 @@
+<!-- draggable-text-box.component.html -->
+<button type="button" class="add-button" (click)="addTextBox()">Add Text Box</button>
+
+<div *ngFor="let textbox of textboxes; let i = index" cdkDrag [cdkDragFreeDragPosition]="dragPosition" class="draggable-box">
+  <button type="button" class="delete-button" (click)="deleteTextBox(i)">Delete</button>
+  <textarea
+    [(ngModel)]="textbox.text"
+    placeholder="Drag me and edit text..."
+    (focus)="onTextBoxFocus(textbox)"
+    (blur)="onTextBoxBlur()"
+    [style.font-size.px]="textbox.fontSize"
+    [style.font-style]="textbox.fontStyle"
+    [style.color]="textbox.fontColor"
+    [style.line-height]="textbox.lineHeight"
+    [style.letter-spacing.px]="textbox.letterSpacing"
+    [style.height.px]="textbox.textarea"
+    
+  ></textarea>
+  <div *ngIf="isEditing" class="edit-options">
+    <label>Font Size:</label>
+    <input type="number" [(ngModel)]="textbox.fontSize" (change)="changeFontSize(textbox.fontSize)" />
+    
+    <label>Font Style:</label>
+    <select [(ngModel)]="textbox.fontStyle" (change)="changeFontStyle(textbox.fontStyle)">
+      <option value="normal">Normal</option>
+      <option value="italic">Italic</option>
+      <option value="oblique">Oblique</option>
+    </select>
+    
+    <label>Font Color:</label>
+    <input type="color" [(ngModel)]="textbox.fontColor" (change)="changeFontColor(textbox.fontColor)" />
+    
+    <label>Line Height:</label>
+    <input type="number" [(ngModel)]="textbox.lineHeight" (change)="changeLineHeight(textbox.lineHeight)" />
+    
+    <label>Letter Spacing:</label>
+    <input type="number" [(ngModel)]="textbox.letterSpacing" (change)="changeLetterSpacing(textbox.letterSpacing)" />
+   
+    <label>Textarea Height:</label>
+    <input type="number" [(ngModel)]="textbox.textarea" (change)="changeTextArea(textbox.textarea)" />
+    
+  </div>
+</div>
